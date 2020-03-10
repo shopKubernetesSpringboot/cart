@@ -19,13 +19,21 @@ public class CartServiceTest {
     private CartService service;
 
     @Test
-    public void test() {
+    public void add() {
         StepVerifier
             .create(service.add(Mono.just(new Cart()),new CartItemAddRequest(new Item(1L,"product1"))))
             .assertNext(loaded -> {
                 assertEquals("product1",loaded.getName());
                 assertEquals((Long)1L,loaded.getId());
             })
+            .expectComplete()
+            .verify();
+    }
+    @Test
+    public void list() {
+        StepVerifier
+            .create(service.list(Mono.just(new Cart())))
+            .assertNext(loaded -> assertEquals(0,loaded.size()))
             .expectComplete()
             .verify();
     }
