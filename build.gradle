@@ -31,7 +31,6 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
     implementation group: 'org.springframework.session', name: 'spring-session-core'
 
