@@ -9,8 +9,8 @@ before_install:
   - chmod +x gradlew
 
 script:
-#  - ./gradlew sonarqube
-  - sonar-scanner
+  - ./gradlew sonarqube
+#  - sonar-scanner
 cache:
   directories:
     - '$HOME/.m2/repository'
