@@ -18,7 +18,6 @@ public class CartRouterTest {
 
     @BeforeEach
     public void setUp() {
-
         RouterFunction<?> route = route(PUT("/cart/add").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
                 request -> ServerResponse.ok().bodyValue("It works!"));
         this.testClient = WebTestClient.bindToRouterFunction(route).build();
