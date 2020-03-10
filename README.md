@@ -30,3 +30,9 @@ Notes:
 - Use `postman_collection.json` (importing the json file in Postman client):
     - `add`: to add an item to the cart
     - `list`: to see all items in the cart
+
+# Travis & sonarcloud
+
+Encrypt key
+    travis encrypt --pro <key>
+    
