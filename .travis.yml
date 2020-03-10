@@ -9,7 +9,7 @@ before_install:
   - chmod +x gradlew
 
 script:
-  - ./gradlew sonarqube
+  - ./gradlew clean build jacocoTestReport sonarqube
 #  - sonar-scanner
 cache:
   directories:

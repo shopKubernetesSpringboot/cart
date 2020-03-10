@@ -28,7 +28,6 @@ repositories {
 }
 
 dependencies {
-
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
 //    compileOnly group: 'org.springframework.boot', name: 'spring-boot-starter-integration', version:'2.2.4.RELEASE'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
