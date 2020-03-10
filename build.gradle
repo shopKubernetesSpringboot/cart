@@ -4,8 +4,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'jacoco'
-    id 'sonar-jacoco'
-    id "org.sonarqube" version "2.7"
+    id "org.sonarqube" version "2.7.1"
 }
 
 group = 'com.dgf'
@@ -15,7 +14,6 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 apply plugin: 'jacoco'
-apply plugin: 'sonar-jacoco'
 
 configurations {
     compileOnly {
@@ -23,10 +21,13 @@ configurations {
     }
 }
 
+plugins.withType(JacocoPlugin) {
+    tasks["test"].finalizedBy 'jacocoTestReport'
+}
+
 repositories {
     mavenCentral()
     jcenter()
-    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' } //todo needed for swagger SNAPSHOT
 }
 
 dependencies {
@@ -45,18 +46,6 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-
-//task junit(type: Test) {
-//    description = "Runs JUnit 4 and JUnit Jupiter tests."
-//    useJUnitPlatform {
-//        excludeTags "failing-test-case"
-//    }
-//    include(["**/*Tests.class", "**/*Test.class"])
-//    exclude(["**/testng/**/*.*"])
-//    systemProperty("testGroups", project.properties.get("testGroups"))
-//    // Java Util Logging for the JUnit Platform.
-//    // systemProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager")
-//}
 
 jacocoTestReport {
     getAdditionalSourceDirs().setFrom(files(sourceSets.main.allSource.srcDirs))
