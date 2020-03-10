@@ -1,5 +1,6 @@
 package com.dgf.shopcart.rest;
 
+import com.dgf.shopcart.model.Cart;
 import com.dgf.shopcart.model.Item;
 import com.dgf.shopcart.rest.handler.CartHandler;
 import com.dgf.shopcart.rest.handler.req.CartItemAddRequest;
@@ -19,6 +20,7 @@ import org.springframework.http.codec.HttpMessageWriter;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
 import org.springframework.mock.http.server.reactive.MockServerHttpResponse;
 import org.springframework.mock.web.server.MockServerWebExchange;
+import org.springframework.mock.web.server.MockWebSession;
 import org.springframework.web.reactive.function.server.HandlerStrategies;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
 @WebFluxTest
@@ -45,6 +48,8 @@ public class CartHandlerTest {
     @Autowired
     private CartHandler handler;
     private ServerResponse.Context context;
+    @MockBean
+    private ServerRequest serverRequest;
 
 
     @BeforeEach
@@ -68,9 +73,9 @@ public class CartHandlerTest {
                 MockServerHttpRequest.put("/cart/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .body(mapper.writeValueAsString(new Item(1L,"product1"))));
-        Mockito.when(validator.validate(any())).thenReturn(Mono.just(new CartItemAddRequest(new Item(1L,"product1"))));
-        Mockito.when(service.add(any(),any())).thenReturn(Mono.just(new Item(1L,"product1")));
+                        .body(mapper.writeValueAsString(new Item(1L, "product1"))));
+        Mockito.when(validator.validate(any())).thenReturn(Mono.just(new CartItemAddRequest(new Item(1L, "product1"))));
+        Mockito.when(service.add(any(), any())).thenReturn(Mono.just(new Item(1L, "product1")));
         ServerRequest serverRequest = ServerRequest.create(exchange, HandlerStrategies.withDefaults().messageReaders());
         Mono<ServerResponse> serverResponseMono = handler.add(serverRequest);
         Mono<Void> voidMono = serverResponseMono.flatMap(response -> {
@@ -85,6 +90,7 @@ public class CartHandlerTest {
                 .expectComplete().verify();
         assertThat(mockResponse.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
     }
+
     @Test
     public void list() {
         MockServerWebExchange exchange = MockServerWebExchange.from(
@@ -105,4 +111,13 @@ public class CartHandlerTest {
         assertThat(mockResponse.getHeaders().getContentType()).isEqualTo(MediaType.APPLICATION_JSON);
     }
 
+    @Test
+    public void getCart() {
+        MockWebSession session = new MockWebSession();
+        Mono<Cart> cart = handler.getCart(Mono.just(session));
+        StepVerifier.create(cart)
+                .expectSubscription()
+                .assertNext(c-> assertEquals(0, c.getItems().size()))
+                .verifyComplete();
+    }
 }
