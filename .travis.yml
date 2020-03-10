@@ -9,16 +9,11 @@ before_install:
   - chmod +x gradlew
 
 script:
-  #  - SONAR_SKIP=$(if [ "$TRAVIS_PULL_REQUEST" = "false" -a $TRAVIS_REPO_SLUG = 'alfasoftware/morf' ]; then echo "false"; else echo "true"; fi)
-#  - git fetch --unshallow
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  #  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-  - mvn clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=davidgfolch_shopcart
-#  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package org.jacoco:jacoco-maven-plugin:report
-#  - if [ "$JAVA_HOME" = "/usr/lib/jvm/java-1.8.0-openjdk-amd64" ]; then mvn sonar:sonar; fi
-
+  - ./gradlew sonarqube
 
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'
