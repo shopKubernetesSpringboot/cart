@@ -1,5 +1,6 @@
 package com.dgf.shopcart.rest;
 
+import com.dgf.shopcart.TestConfig;
 import com.dgf.shopcart.model.Cart;
 import com.dgf.shopcart.model.Item;
 import com.dgf.shopcart.rest.handler.CartHandler;
@@ -14,6 +15,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.HttpMessageWriter;
@@ -35,6 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 
+@Import(TestConfig.class)
 @WebFluxTest
 public class CartHandlerTest {
 
@@ -43,14 +46,11 @@ public class CartHandlerTest {
 
     @MockBean
     private CartService service;
-    @MockBean
+    @Autowired
     private MyValidator<CartItemAddRequest> validator;
     @Autowired
     private CartHandler handler;
     private ServerResponse.Context context;
-    @MockBean
-    private ServerRequest serverRequest;
-
 
     @BeforeEach
     public void createContext() {
@@ -73,8 +73,7 @@ public class CartHandlerTest {
                 MockServerHttpRequest.put("/cart/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
-                        .body(mapper.writeValueAsString(new Item(1L, "product1"))));
-        Mockito.when(validator.validate(any())).thenReturn(Mono.just(new CartItemAddRequest(new Item(1L, "product1"))));
+                        .body(mapper.writeValueAsString(new CartItemAddRequest(new Item(1L, "product1")))));
         Mockito.when(service.add(any(), any())).thenReturn(Mono.just(new Item(1L, "product1")));
         ServerRequest serverRequest = ServerRequest.create(exchange, HandlerStrategies.withDefaults().messageReaders());
         Mono<ServerResponse> serverResponseMono = handler.add(serverRequest);
@@ -120,4 +119,5 @@ public class CartHandlerTest {
                 .assertNext(c-> assertEquals(0, c.getItems().size()))
                 .verifyComplete();
     }
+
 }
