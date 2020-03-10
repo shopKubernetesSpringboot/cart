@@ -1,9 +1,8 @@
-package com.dgf.shopcart.rest;
+package com.dgf.shopcart.rest.handler.validation;
 
 import com.dgf.shopcart.TestConfig;
 import com.dgf.shopcart.model.Item;
 import com.dgf.shopcart.rest.handler.req.CartItemAddRequest;
-import com.dgf.shopcart.rest.handler.validation.MyValidator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
