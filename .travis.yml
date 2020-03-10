@@ -1,0 +1,21 @@
+language: java
+addons:
+  sonarcloud:
+    organization: "davidgfolch-github"
+    token:
+      secure: "HlII5SPMD+zL8jGIOE+TGu7YCSbW/15NhnWX3fO/tZ0EcjwwfyEAYhw8HNqGcP/3VwbBMlRkUQgOWXoX7QJH1bZCplCnA7PAWcM0uSkxjFsHC+FibrCMSH30ciSLIUQerg1pTxzYNnf3/kE7H68VPFEvRXPnfMJUgiwECFYepRTZc4gs8B7ISzt6/i5F0OVt7C0Po8uE+zPV12gf6iASoLNDMWbVBE/fg/YyBmMKy8Q/AJX48Hah8UQRZB/1lzLIwHi+7Q2z7wtCAZv0Vj8jE7IpyvzPjNbFg5kozGE+NX2jYtWu02g/gHQNvYR6pjjPjM5yt8jn3dq1iKguWZ49wzFP8PdCTn3/ygIKoBW1XKRxrtT0QWInptXKG5Uq1MbnB4ZCfq6/o30uUkx6adHk+mdzLxo7AgzUWq6203SMLjz5ZmjZcSZPmKkfi7WDwhJXeafSiRnSvW2S55CZ2qdoaM2H6hY2nBty9zmSpUQiavHvN0AXhAFdOPzUF/Uc+5owQz3l5dUpTSpSZ8z+fgkiucHazMucL9PxzH7aZ6HgO6rdJ6s8xdk6lPMFdQwNUnrZBMwl7nkPgkCBxRGJ+BNYcPX5g+PFsJRNFq6fZbYImwL8T136Gfst20+StZyHvZ2cMdbm26m/m6TNvlQhvH48KSPlCh5X3GwIOQRlFdBBkuw="
+
+script:
+  #  - SONAR_SKIP=$(if [ "$TRAVIS_PULL_REQUEST" = "false" -a $TRAVIS_REPO_SLUG = 'alfasoftware/morf' ]; then echo "false"; else echo "true"; fi)
+  - git fetch --unshallow
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  #  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=davidgfolch_shopcart
+#  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package org.jacoco:jacoco-maven-plugin:report
+#  - if [ "$JAVA_HOME" = "/usr/lib/jvm/java-1.8.0-openjdk-amd64" ]; then mvn sonar:sonar; fi
+
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'

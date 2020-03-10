@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'idea'
+    id "org.sonarqube" version "2.7"
+}
+
+group = 'com.dgf'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+apply plugin: "jacoco"
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' } //todo needed for swagger SNAPSHOT
+}
+
+dependencies {
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+//    compileOnly group: 'org.springframework.boot', name: 'spring-boot-starter-integration', version:'2.2.4.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
+//    compileOnly group: 'org.springframework.integration', name: 'spring-integration-webflux', version:'5.2.3.RELEASE'
+//    compileOnly group: 'io.springfox', name: 'springfox-swagger2', version:'3.0.0-SNAPSHOT'
+//    compileOnly group: 'io.springfox', name: 'springfox-spring-webflux', version:'3.0.0-SNAPSHOT'
+//    compileOnly group: 'io.springfox', name: 'springfox-spring-integration-webflux', version:'3.0.0-SNAPSHOT'
+//    compileOnly group: 'io.springfox', name: 'springfox-swagger-ui', version:'3.0.0-SNAPSHOT'
+
+    implementation group: 'org.springframework.session', name: 'spring-session-core'
+
+//    compileOnly 'org.projectlombok:lombok'
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}

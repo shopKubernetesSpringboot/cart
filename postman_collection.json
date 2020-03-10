@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "e3575ffb-4691-4c91-81cc-4b7cd6d33aff",
+		"name": "shopCart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "filmCreateAll",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/film/createAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"film",
+						"createAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customerCreateAll",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/createAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"createAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filmFindLike",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/film/find/sp",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"film",
+						"find",
+						"sp"
+					]
+				},
+				"description": "Find like by title"
+			},
+			"response": []
+		},
+		{
+			"name": "filmList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/film/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"film",
+						"list"
+					]
+				},
+				"description": "Find like by title"
+			},
+			"response": []
+		},
+		{
+			"name": "customerFind",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/find/Stella/Harris",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"find",
+						"Stella",
+						"Harris"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customerGet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/customer/get/5d89f274c22a011f98f6dc96",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer",
+						"get",
+						"5d89f274c22a011f98f6dc96"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rentFilms",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\" : \"5d89f274c22a011f98f6dc96\",\r\n  \"films\" : [ \"5d89f274c22a011f98f6dc91\", \"5d89f274c22a011f98f6dc92\", \"5d89f274c22a011f98f6dc90\", \"5d89f274c22a011f98f6dc93\" ]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/rent",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "returnFilms",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userId\" : \"5d89f274c22a011f98f6dc96\",\r\n  \"films\" : [ \"5d89f274c22a011f98f6dc91\", \"5d89f274c22a011f98f6dc92\", \"5d89f274c22a011f98f6dc90\", \"5d89f274c22a011f98f6dc93\" ]\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/return/7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"return",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
