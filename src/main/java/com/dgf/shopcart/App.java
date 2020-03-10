@@ -1,4 +1,4 @@
-package com.dgf.shopCart;
+package com.dgf.shopcart;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

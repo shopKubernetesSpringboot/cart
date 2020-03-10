@@ -1,6 +1,6 @@
-package com.dgf.shopCart.rest.handler.req;
+package com.dgf.shopcart.rest.handler.req;
 
-import com.dgf.shopCart.model.Item;
+import com.dgf.shopcart.model.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

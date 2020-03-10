@@ -1,4 +1,4 @@
-package com.dgf.shopCart;
+package com.dgf.shopcart;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

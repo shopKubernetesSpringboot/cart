@@ -1,6 +1,6 @@
-package com.dgf.shopCart.rest;
+package com.dgf.shopcart.rest;
 
-import com.dgf.shopCart.rest.handler.CartHandler;
+import com.dgf.shopcart.rest.handler.CartHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -11,7 +11,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class CartRouter extends BaseRouter {
+public class CartRouter {
 
     @Bean
     public RouterFunction<ServerResponse> add(CartHandler handler) {

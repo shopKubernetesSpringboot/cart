@@ -1,4 +1,4 @@
-package com.dgf.shopCart.rest.handler.validation;
+package com.dgf.shopcart.rest.handler.validation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

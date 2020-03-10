@@ -1,4 +1,4 @@
-package com.dgf.shopCart.model;
+package com.dgf.shopcart.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,8 +1,8 @@
-package com.dgf.shopCart.service;
+package com.dgf.shopcart.service;
 
-import com.dgf.shopCart.model.Cart;
-import com.dgf.shopCart.model.Item;
-import com.dgf.shopCart.rest.handler.req.CartItemAddRequest;
+import com.dgf.shopcart.model.Cart;
+import com.dgf.shopcart.model.Item;
+import com.dgf.shopcart.rest.handler.req.CartItemAddRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

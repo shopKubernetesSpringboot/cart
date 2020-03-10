@@ -1,9 +1,9 @@
-package com.dgf.shopCart.rest.handler;
+package com.dgf.shopcart.rest.handler;
 
-import com.dgf.shopCart.model.Cart;
-import com.dgf.shopCart.rest.handler.req.CartItemAddRequest;
-import com.dgf.shopCart.rest.handler.validation.MyValidator;
-import com.dgf.shopCart.service.CartService;
+import com.dgf.shopcart.model.Cart;
+import com.dgf.shopcart.rest.handler.req.CartItemAddRequest;
+import com.dgf.shopcart.rest.handler.validation.MyValidator;
+import com.dgf.shopcart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
