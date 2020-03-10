@@ -1,7 +1,6 @@
 package com.dgf.shopcart.rest;
 
 import com.dgf.shopcart.TestConfig;
-import com.dgf.shopcart.model.Cart;
 import com.dgf.shopcart.model.Item;
 import com.dgf.shopcart.rest.handler.CartHandler;
 import com.dgf.shopcart.rest.handler.req.CartItemAddRequest;
@@ -76,8 +75,7 @@ public class CartHandlerTest {
                         .body(mapper.writeValueAsString(new CartItemAddRequest(new Item(1L, "product1")))));
         Mockito.when(service.add(any(), any())).thenReturn(Mono.just(new Item(1L, "product1")));
         ServerRequest serverRequest = ServerRequest.create(exchange, HandlerStrategies.withDefaults().messageReaders());
-        Mono<ServerResponse> serverResponseMono = handler.add(serverRequest);
-        Mono<Void> voidMono = serverResponseMono.flatMap(response -> {
+        Mono<Void> voidMono = handler.add(serverRequest).flatMap(response -> {
             assertThat(response.statusCode()).isEqualTo(HttpStatus.OK);
             return response.writeTo(exchange, context);
         });
@@ -96,13 +94,10 @@ public class CartHandlerTest {
                 MockServerHttpRequest.get("/cart/list"));
         Mockito.when(service.list(any())).thenReturn(Mono.just(new ArrayList<>()));
         ServerRequest serverRequest = ServerRequest.create(exchange, HandlerStrategies.withDefaults().messageReaders());
-        Mono<ServerResponse> serverResponseMono = handler.list(serverRequest);
-        Mono<Void> voidMono = serverResponseMono.flatMap(response -> {
+        StepVerifier.create(handler.list(serverRequest).flatMap(response -> {
             assertThat(response.statusCode()).isEqualTo(HttpStatus.OK);
             return response.writeTo(exchange, context);
-        });
-        StepVerifier.create(voidMono)
-                .expectComplete().verify();
+        })).expectComplete().verify();
         MockServerHttpResponse mockResponse = exchange.getResponse();
         StepVerifier.create(mockResponse.getBody())
                 .consumeNextWith(System.out::println)
@@ -112,11 +107,9 @@ public class CartHandlerTest {
 
     @Test
     public void getCart() {
-        MockWebSession session = new MockWebSession();
-        Mono<Cart> cart = handler.getCart(Mono.just(session));
-        StepVerifier.create(cart)
+        StepVerifier.create(handler.getCart(Mono.just(new MockWebSession())))
                 .expectSubscription()
-                .assertNext(c-> assertEquals(0, c.getItems().size()))
+                .assertNext(c -> assertEquals(0, c.getItems().size()))
                 .verifyComplete();
     }
 
