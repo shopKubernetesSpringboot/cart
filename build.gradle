@@ -10,8 +10,8 @@ plugins {
 group = 'com.dgf'
 version = '0.0.1-SNAPSHOT'
 
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 apply plugin: 'jacoco'
 
@@ -29,18 +29,9 @@ repositories {
 
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
-//    compileOnly group: 'org.springframework.boot', name: 'spring-boot-starter-integration', version:'2.2.4.RELEASE'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
-//    compileOnly group: 'org.springframework.integration', name: 'spring-integration-webflux', version:'5.2.3.RELEASE'
-//    compileOnly group: 'io.springfox', name: 'springfox-swagger2', version:'3.0.0-SNAPSHOT'
-//    compileOnly group: 'io.springfox', name: 'springfox-spring-webflux', version:'3.0.0-SNAPSHOT'
-//    compileOnly group: 'io.springfox', name: 'springfox-spring-integration-webflux', version:'3.0.0-SNAPSHOT'
-//    compileOnly group: 'io.springfox', name: 'springfox-swagger-ui', version:'3.0.0-SNAPSHOT'
-
     implementation group: 'org.springframework.session', name: 'spring-session-core'
 
-//    compileOnly 'org.projectlombok:lombok'
-//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -51,4 +42,28 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    getAdditionalSourceDirs().setFrom(files(sourceSets.main.allSource.srcDirs))
+    getSourceDirectories().setFrom(files(sourceSets.main.allSource.srcDirs))
+    getClassDirectories().setFrom(files(sourceSets.main.output))
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
+}
+
+task jacocoRootReport(type: JacocoReport) {
+    dependsOn = subprojects.test
+    getAdditionalSourceDirs().setFrom(files(subprojects.sourceSets.main.allSource.srcDirs))
+    getSourceDirectories().setFrom(files(subprojects.sourceSets.main.allSource.srcDirs))
+    getClassDirectories().setFrom(files(subprojects.sourceSets.main.output))
+    getExecutionData().setFrom(files(subprojects.jacocoTestReport.executionData))
+    reports {
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = false
+    }
 }
