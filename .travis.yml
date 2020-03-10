@@ -10,7 +10,7 @@ before_install:
 
 script:
   #  - SONAR_SKIP=$(if [ "$TRAVIS_PULL_REQUEST" = "false" -a $TRAVIS_REPO_SLUG = 'alfasoftware/morf' ]; then echo "false"; else echo "true"; fi)
-  - git fetch --unshallow
+#  - git fetch --unshallow
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   #  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
   - mvn clean verify sonar:sonar -Pcoverage -Dsonar.projectKey=davidgfolch_shopcart
