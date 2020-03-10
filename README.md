@@ -31,8 +31,13 @@ Notes:
     - `add`: to add an item to the cart
     - `list`: to see all items in the cart
 
-# Travis & sonarcloud
+# Initial setup reference
 
-Encrypt key
-    travis encrypt --pro <key>
+## Travis & sonarcloud setup
+
+Create a token for this project: https://sonarcloud.io/account/security/
+
+Encrypt key (in project folder)
+    
+    travis encrypt --pro <keyCreatedInSonarCloud>
     
