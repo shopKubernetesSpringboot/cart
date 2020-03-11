@@ -9,14 +9,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.server.reactive.HttpHandler;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
-import org.springframework.mock.http.server.reactive.MockServerHttpResponse;
 import org.springframework.mock.web.server.MockServerWebExchange;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.ServerWebInputException;
+import org.springframework.web.server.WebHandler;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -45,14 +44,11 @@ public class GlobalExceptionHandlerTest {
         globalErrorAttributes.storeErrorInformation(new ServerWebInputException("Test error"), exchange);
         RouterFunction<ServerResponse> routerFunction = globalExceptionHandler.getRoutingFunction(globalErrorAttributes);
 
-        HttpHandler result = RouterFunctions.toHttpHandler(routerFunction);
+        WebHandler result = RouterFunctions.toWebHandler(routerFunction);
         assertNotNull(result);
 
-        MockServerHttpResponse httpResponse = new MockServerHttpResponse();
-        httpResponse.setComplete();
-        result.handle(httpRequest, httpResponse).block();
-//        assertEquals(HttpStatus.BAD_REQUEST,httpResponse.getStatusCode());
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,httpResponse.getStatusCode());
+        result.handle(exchange).block();
+        assertEquals(HttpStatus.BAD_REQUEST,exchange.getResponse().getStatusCode());
     }
 
 }
