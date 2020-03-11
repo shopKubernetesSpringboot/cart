@@ -22,11 +22,22 @@ Notes:
     - you can run sonarqube gradle task if you have sonar installed on localhost:9000
     - or see the [Sonarcloud.io](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart) dashboard for this project.
   
-### Try it
+### Run
+#### Spring boot application
 - Run App as a spring-boot app:
     - command line: `gradlew :bootRun`
     - intellij: right button on `App.java` & Run...
+#### With docker
 
+    docker build -t techtests/shopcart .
+    docker run -p 8080:8080 -t techtests/shopcart
+
+### Try
+#### With curl
+
+    curl -v -b cookies.txt -c cookies.txt -d '{"item": {"id": 1,"name": "product4"}}' -H 'Content-Type: application/json' http://localhost:8080/cart/add
+    curl -v -b cookies.txt -c cookies.txt -v http://localhost:8080/cart/list
+#### With postman
 - Use `postman_collection.json` (importing the json file in Postman client):
     - `add`: to add an item to the cart
     - `list`: to see all items in the cart

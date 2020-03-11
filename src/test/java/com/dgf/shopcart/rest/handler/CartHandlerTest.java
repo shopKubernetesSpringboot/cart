@@ -41,7 +41,7 @@ public class CartHandlerTest extends BaseHandlerTest {
     @Test
     public void add() {
         MockServerWebExchange exchange = MockServerWebExchange.from(
-                MockServerHttpRequest.put("/cart/add")
+                MockServerHttpRequest.post("/cart/add")
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON)
                         .body(cartItemAddRequestJson));

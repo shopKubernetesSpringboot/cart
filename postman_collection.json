@@ -11,7 +11,7 @@
 			"name": "add",
 			"request": {
 				"url": "localhost:8080/cart/add",
-				"method": "PUT",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",

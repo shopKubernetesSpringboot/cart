@@ -31,7 +31,7 @@ public class GlobalExceptionHandlerTest {
 
     @Test
     public void badRequest() {
-        MockServerHttpRequest httpRequest = MockServerHttpRequest.put("/cart/add")
+        MockServerHttpRequest httpRequest = MockServerHttpRequest.post("/cart/add")
                 .contentType(APPLICATION_JSON)
                 .accept(APPLICATION_JSON)
                 .build();

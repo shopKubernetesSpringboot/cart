@@ -17,14 +17,14 @@ public class CartRouterTest {
 
     @BeforeEach
     public void setUp() {
-        RouterFunction<?> route = route(PUT("/cart/add").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
+        RouterFunction<?> route = route(POST("/cart/add").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)),
                 request -> ServerResponse.ok().bodyValue("It works!"));
         this.testClient = WebTestClient.bindToRouterFunction(route).build();
     }
 
     @Test
     public void add() {
-        this.testClient.put().uri("/cart/add")
+        this.testClient.post().uri("/cart/add")
                 .accept(APPLICATION_JSON)
                 .contentType(APPLICATION_JSON)
                 .exchange()

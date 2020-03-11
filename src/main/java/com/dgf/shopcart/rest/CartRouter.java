@@ -15,7 +15,7 @@ public class CartRouter {
 
     @Bean
     public RouterFunction<ServerResponse> add(CartHandler handler) {
-        return route(PUT("/cart/add").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)), handler::add);
+        return route(POST("/cart/add").and(accept(APPLICATION_JSON)).and(contentType(APPLICATION_JSON)), handler::add);
     }
     @Bean
     public RouterFunction<ServerResponse> list(CartHandler handler) {
