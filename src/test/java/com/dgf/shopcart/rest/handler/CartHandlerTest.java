@@ -78,8 +78,7 @@ public class CartHandlerTest {
             assertThat(response.statusCode()).isEqualTo(HttpStatus.OK);
             return response.writeTo(exchange, context);
         });
-        StepVerifier.create(voidMono)
-                .expectComplete().verify();
+        StepVerifier.create(voidMono).expectComplete().verify();
         MockServerHttpResponse mockResponse = exchange.getResponse();
         StepVerifier.create(mockResponse.getBody())
                 .consumeNextWith(System.out::println)
