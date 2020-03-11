@@ -11,11 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
-import org.springframework.mock.http.server.reactive.MockServerHttpResponse;
 import org.springframework.mock.web.server.MockServerWebExchange;
 import org.springframework.mock.web.server.MockWebSession;
-import org.springframework.web.reactive.function.server.HandlerStrategies;
-import org.springframework.web.reactive.function.server.ServerRequest;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -64,19 +61,6 @@ public class CartHandlerTest extends BaseHandlerTest {
             return response.writeTo(exchange, context);
         })).expectComplete().verify();
         assertExchange(exchange,"[]");
-    }
-
-    private ServerRequest getDefaultServerReq(MockServerWebExchange exchange) {
-        return ServerRequest.create(exchange, HandlerStrategies.withDefaults().messageReaders());
-    }
-
-    private void assertExchange(MockServerWebExchange exchange, String expectedBody) {
-        MockServerHttpResponse mockResponse = exchange.getResponse();
-        StepVerifier.create(mockResponse.getBody())
-                .consumeNextWith(System.out::println)
-                .expectComplete().verify();
-        assertThat(mockResponse.getHeaders().getContentType()).isEqualTo(APPLICATION_JSON);
-        assertThat(mockResponse.getBodyAsString().block()).isEqualTo(expectedBody);
     }
 
     @Test
