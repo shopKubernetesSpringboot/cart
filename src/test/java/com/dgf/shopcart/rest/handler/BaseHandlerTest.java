@@ -17,7 +17,7 @@ import java.util.List;
 
 @Import(TestConfig.class)
 @WebFluxTest
-public class BaseHandlerTest {
+public abstract class BaseHandlerTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final HandlerStrategies strategies = HandlerStrategies.withDefaults();
