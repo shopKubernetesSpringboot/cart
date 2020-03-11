@@ -15,12 +15,12 @@ Fully reactive shop cart REST API.
 
 Notes:
 - BeanValidation implementation.
+- Reactive junit tests (of course).
 - No security implementation at all.
 - No persistence implementation.
-- You'll find some reactive junit tests.
 - Sonar gradle plugin
     - you can run sonarqube gradle task if you have sonar installed on localhost:9000
-    - or in Sonarcloud.io
+    - or see the [Sonarcloud.io](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart) dashboard for this project.
   
 ### Try it
 - Run App as a spring-boot app:

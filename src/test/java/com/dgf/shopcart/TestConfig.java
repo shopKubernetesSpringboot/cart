@@ -1,5 +1,6 @@
 package com.dgf.shopcart;
 
+import com.dgf.shopcart.rest.handler.GlobalErrorAttributes;
 import com.dgf.shopcart.rest.handler.req.CartItemAddRequest;
 import com.dgf.shopcart.rest.handler.validation.MyValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class TestConfig {
     @Bean
     public MyValidator<CartItemAddRequest> validator() {
         return new MyValidator<>(validator);
+    }
+    @Bean
+    public GlobalErrorAttributes globalErrorAttributes() {
+        return new GlobalErrorAttributes();
     }
 
 }

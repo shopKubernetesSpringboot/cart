@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AppTest {
 
     @Test
-    public void contextLoads() {
+    public void contextLoads() { //todo doesn't cover
         assertTrue(true);
     }
 
