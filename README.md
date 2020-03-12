@@ -4,23 +4,27 @@
 
 Fully reactive shop cart REST API.
 
+- Allows to add an Item at once to the Cart.  Keeps items in the Cart in the current session.
+
+- Allows to list cart's items.
+
 ### Prerequisites
 - Enable annotation processors (in your IDE for lombok)
 
 ### Architecture
 - Reactive Layers architecture (spring-framework reactor).
 - Java non-blocking functional programming: reactor+streams.
-- REST API's with Spring-WebFlux.
+- REST API with Spring-WebFlux.
     - Using [Functional Programming Model](https://docs.spring.io/spring-framework/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/web-reactive.html#_functional_programming_model)
 
 Notes:
 - BeanValidation implementation.
-- Reactive junit tests (of course).
-- No security implementation at all.
-- No persistence implementation.
+- Reactive junit tests.
+- Integration test.
+- No security implementation.
 - Sonar gradle plugin
-    - you can run sonarqube gradle task if you have sonar installed on localhost:9000
-    - or see the [Sonarcloud.io](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart) dashboard for this project.
+    - you can run Sonarqube gradle task if you have sonar installed on localhost:9000
+    - or see the [Sonarcloud.io](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart) dashboard for this project (through travis-ci integration).
   
 ### Run
 #### Spring boot application
@@ -44,7 +48,7 @@ Notes:
 
 # Initial setup reference
 
-## Travis & sonarcloud setup
+## Travis & SonarCloud setup
 
 Create a token for this project: https://sonarcloud.io/account/security/
 
