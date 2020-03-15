@@ -35,7 +35,7 @@ Notes:
 
     docker build -t techtests/shopcart .
     docker run -p 8080:8080 -t techtests/shopcart
-
+    
 ### Try
 #### With curl
 
@@ -55,4 +55,35 @@ Create a token for this project: https://sonarcloud.io/account/security/
 Encrypt key (in project folder)
     
     travis encrypt --pro <keyCreatedInSonarCloud>
-    
+
+# Microservice
+## Size optimization
+### With spring-boot-thin-launcher
+https://github.com/spring-projects-experimental/spring-boot-thin-launcher
+
+Original/thin generated jars:
+
+    -rwxrwxrwx 1 slks slks 19683502 mar 15 09:13 shopCart-0.0.1-SNAPSHOT.jar
+    -rwxrwxrwx 1 slks slks 25610 mar 15 16:55 build/libs/shopCart-0.0.1-SNAPSHOT.jar
+
+Original/thin docker image (techtests/shopcart): 125MB/105MB
+
+**Using `FROM openjdk:8-jre-alpine` (instead of `FROM openjdk:8-jdk-alpine`) final size: 84.9MB**
+
+### Attempt to minimize docker image size with jdk11
+This is **not a solution** as it generates a bigger image
+
+    docker build -f Dockerfile-optimized -t techtests/shopcart-optimized .
+    docker images | grep techtests/shopcart 
+
+Generated images:
+
+    $ docker images | grep techtests/shopcart
+    techtests/shopcart                               latest               36234d830c12        14 hours ago        125MB
+    techtests/shopcart-optimized                     latest               3e22c1446dd8        15 hours ago        151MB
+
+# TODO
+- Add security and authorization
+- Add persistence.
+- Microservices architecture.
+
