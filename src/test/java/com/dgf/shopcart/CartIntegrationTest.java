@@ -32,6 +32,12 @@ public class CartIntegrationTest {
     private TestRestTemplate restTemplate = new TestRestTemplate(ENABLE_COOKIES);
 
     @Test
+    public void contextLoads() {
+        App.main(new String[]{});
+        assertTrue(true);
+    }
+
+    @Test
     public void addAndList() {
         ResponseEntity<Item> resp = restTemplate.postForEntity(getHost()+"/cart/add", new CartItemAddRequest(item), Item.class);
         assertEquals(item,resp.getBody());
