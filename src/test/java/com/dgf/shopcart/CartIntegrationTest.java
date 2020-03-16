@@ -13,8 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.web.client.TestRestTemplate.HttpClientOption.ENABLE_COOKIES;
 import static org.springframework.http.HttpHeaders.COOKIE;
 import static org.springframework.http.HttpHeaders.SET_COOKIE;
