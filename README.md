@@ -21,6 +21,10 @@ Notes:
 - BeanValidation implementation.
 - Reactive junit tests.
 - Integration test.
+- Swagger UI (webflux).
+    - Dont work yet with webflux functional style:
+        - https://springdoc.github.io/springdoc-openapi-demos/
+        - https://github.com/springdoc/springdoc-openapi-gradle-plugin
 - No security implementation.
 - Sonar gradle plugin
     - you can run Sonarqube gradle task if you have sonar installed on localhost:9000
@@ -37,6 +41,10 @@ Notes:
     docker run -p 8080:8080 -t techtests/shopcart
     
 ### Try
+#### With Swagger
+
+Access http://localhost:8080/swagger-ui.html
+ 
 #### With curl
 
     curl -v -b cookies.txt -c cookies.txt -d '{"item": {"id": 1,"name": "product4"}}' -H 'Content-Type: application/json' http://localhost:8080/cart/add

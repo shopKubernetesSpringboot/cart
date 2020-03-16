@@ -2,11 +2,13 @@ plugins {
     id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'org.springframework.boot.experimental.thin-launcher' version '1.0.23.RELEASE'
+    id 'com.github.johnrengelman.processes' version '0.5.0'
+    id 'org.springdoc.openapi-gradle-plugin' version '1.0.0'  //todo Spring-weblfux with Functional Endpoints, will be available in the future release https://springdoc.github.io/springdoc-openapi-demos/
     id 'java'
     id 'maven'
     id 'idea'
     id 'jacoco'
-    id "org.sonarqube" version "2.7.1"
+    id 'org.sonarqube' version '2.7.1'
 }
 
 group = 'com.dgf'
@@ -47,10 +49,13 @@ repositories {
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
     implementation group: 'org.springframework.session', name: 'spring-session-core'
-
     compile group: 'org.springframework.boot.experimental', name: 'spring-boot-thin-gradle-plugin', version: '1.0.23.RELEASE'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    compile group: 'org.springdoc', name: 'springdoc-openapi-webflux-ui', version: '1.2.33'
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
