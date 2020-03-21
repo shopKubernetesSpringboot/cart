@@ -14,10 +14,19 @@ import java.util.List;
 public class CartService {
 
     public Mono<Item> add(Mono<Cart> cart, CartItemAddRequest req) {
-        return cart.map(c -> {
-            c.getItems().add(req.getItem());
-            return req.getItem();
-        }).or(Mono.empty());
+        return cart.map(c ->
+                c.getItems().stream()
+                    .filter(p -> p.getId().longValue() == req.getItem().getId().longValue())
+                    .findFirst()
+                    .map(p-> {
+                        p.setQuantity(p.getQuantity()+1);
+                        return p;
+                    })
+                    .orElseGet(() -> {
+                        c.getItems().add(req.getItem());
+                        return req.getItem();
+                    })
+        );
     }
 
     public Mono<List<Item>> list(Mono<Cart> cart) {

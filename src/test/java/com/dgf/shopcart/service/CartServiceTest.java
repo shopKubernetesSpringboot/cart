@@ -16,7 +16,7 @@ public class CartServiceTest {
     @Test
     public void add() {
         StepVerifier
-            .create(service.add(Mono.just(new Cart()),new CartItemAddRequest(new Item(1L,"product1"))))
+            .create(service.add(Mono.just(new Cart()),new CartItemAddRequest(new Item(1L,"product1", 1))))
             .assertNext(loaded -> {
                 assertEquals("product1",loaded.getName());
                 assertEquals((Long)1L,loaded.getId());

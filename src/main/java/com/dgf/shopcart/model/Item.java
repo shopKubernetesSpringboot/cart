@@ -15,4 +15,5 @@ public class Item {
     private Long id;
     @NotNull
     private String name;
+    private Integer quantity=1;
 }

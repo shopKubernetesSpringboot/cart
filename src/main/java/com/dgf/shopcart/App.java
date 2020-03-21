@@ -56,6 +56,9 @@ public class App {
     SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) {
         return http
                 .csrf().disable()
+                //https://docs.spring.io/spring-security/site/docs/current/reference/html5/#webflux-csrf-configure
+//                .csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
+//                .csrf(csrf -> csrf.csrfTokenRepository(new CookieServerCsrfTokenRepository()))
                 .cors(c -> c.configurationSource(cors()))
                 .authorizeExchange()
 
@@ -69,8 +72,6 @@ public class App {
                 .and()
                 .build();
     }
-
-
 
 //    private static final String ALLOWED_HEADERS = "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN, mode";
 //    private static final String ALLOWED_METHODS = "GET, PUT, POST, DELETE, OPTIONS";
