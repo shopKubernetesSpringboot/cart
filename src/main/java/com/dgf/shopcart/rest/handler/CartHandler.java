@@ -6,7 +6,7 @@ import com.dgf.shopcart.rest.handler.validation.MyValidator;
 import com.dgf.shopcart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.server.WebSession;
@@ -16,7 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @Slf4j
 public class CartHandler {

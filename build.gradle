@@ -32,6 +32,7 @@ configurations {
 }
 
 jar.dependsOn = [thinProperties] //thin-launcher
+
 plugins.withType(JacocoPlugin) {
     tasks["test"].finalizedBy 'jacocoTestReport'
 }
@@ -46,15 +47,19 @@ repositories {
 
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     implementation group: 'org.springframework.session', name: 'spring-session-core'
 
     compile group: 'org.springframework.boot.experimental', name: 'spring-boot-thin-gradle-plugin', version: '1.0.23.RELEASE'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    testCompile 'org.springframework.security:spring-security-test'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'io.projectreactor:reactor-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 test {

@@ -9,14 +9,13 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=ncloc)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=security_rating)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=sqale_index)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 ## Description
 
-Fully reactive shop cart REST API.
+Fully reactive shop cart REST API micro-service.  Also see the related [front-end ReactJs project](https://github.com/davidgfolch/shop-web)
 
 - Allows to add an Item at once to the Cart.  Keeps items in the Cart in the current session.
 
@@ -35,7 +34,7 @@ Notes:
 - BeanValidation implementation.
 - Reactive junit tests.
 - Integration test.
-- No security implementation.
+- Basic auth security implementation.
 - Sonar gradle plugin
     - you can run Sonarqube gradle task if you have sonar installed on localhost:9000
     - or see the [Sonarcloud.io](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart) dashboard for this project (through travis-ci integration).
@@ -53,8 +52,8 @@ Notes:
 ### Try
 #### With curl
 
-    curl -v -b cookies.txt -c cookies.txt -d '{"item": {"id": 1,"name": "product4"}}' -H 'Content-Type: application/json' http://localhost:8080/cart/add
-    curl -v -b cookies.txt -c cookies.txt -v http://localhost:8080/cart/list
+    curl -v -b cookies.txt -c cookies.txt -u user:user -d '{"item": {"id": 1,"name": "product4"}}' -H 'Content-Type: application/json' http://localhost:8080/cart/add
+    curl -v -b cookies.txt -c cookies.txt -u user:user http://localhost:8080/cart/list
 #### With postman
 - Use `postman_collection.json` (importing the json file in Postman client):
     - `add`: to add an item to the cart
@@ -97,7 +96,5 @@ Generated images:
     techtests/shopcart-optimized                     latest               3e22c1446dd8        15 hours ago        151MB
 
 # TODO
-- Add security and authorization
-- Add persistence.
-- Microservices architecture.
+- Full micro-service architecture.
 
