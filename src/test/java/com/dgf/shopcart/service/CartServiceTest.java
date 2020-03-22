@@ -37,6 +37,7 @@ public class CartServiceTest {
                 .expectComplete()
                 .verify();
     }
+
     @Test
     public void list() {
         Cart cart = new Cart();
@@ -44,6 +45,17 @@ public class CartServiceTest {
         StepVerifier
             .create(service.list(Mono.just(cart)))
             .assertNext(loaded -> assertEquals(1,loaded.size()))
+            .expectComplete()
+            .verify();
+    }
+
+    @Test
+    public void delete() {
+        Cart cart = new Cart();
+        cart.getItems().add(item);
+        StepVerifier
+            .create(service.delete(Mono.just(cart)))
+            .assertNext(loaded -> assertEquals(0,loaded.size()))
             .expectComplete()
             .verify();
     }
