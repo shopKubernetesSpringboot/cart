@@ -13,10 +13,12 @@ public class CartServiceTest {
 
     private CartService service = new CartService();
 
+    private final Item item = new Item(1L, "product1", 1);
+
     @Test
     public void add() {
         StepVerifier
-            .create(service.add(Mono.just(new Cart()),new CartItemAddRequest(new Item(1L,"product1", 1))))
+            .create(service.add(Mono.just(new Cart()),new CartItemAddRequest(item)))
             .assertNext(loaded -> {
                 assertEquals("product1",loaded.getName());
                 assertEquals((Long)1L,loaded.getId());
@@ -24,11 +26,24 @@ public class CartServiceTest {
             .expectComplete()
             .verify();
     }
+
+    @Test
+    public void addExisting() {
+        Cart cart = new Cart();
+        cart.getItems().add(item);
+        StepVerifier
+                .create(service.add(Mono.just(cart),new CartItemAddRequest(item)))
+                .assertNext(loaded -> assertEquals(2,loaded.getQuantity()))
+                .expectComplete()
+                .verify();
+    }
     @Test
     public void list() {
+        Cart cart = new Cart();
+        cart.getItems().add(item);
         StepVerifier
-            .create(service.list(Mono.just(new Cart())))
-            .assertNext(loaded -> assertEquals(0,loaded.size()))
+            .create(service.list(Mono.just(cart)))
+            .assertNext(loaded -> assertEquals(1,loaded.size()))
             .expectComplete()
             .verify();
     }

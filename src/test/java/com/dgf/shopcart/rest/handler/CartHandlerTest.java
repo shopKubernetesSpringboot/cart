@@ -53,10 +53,20 @@ public class CartHandlerTest extends BaseHandlerTest {
 
     @Test
     public void list() {
-        MockServerWebExchange exchange = MockServerWebExchange.from(
-                MockServerHttpRequest.get("/cart/list"));
+        MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.get("/cart/list"));
         Mockito.when(service.list(any())).thenReturn(Mono.just(new ArrayList<>()));
         StepVerifier.create(handler.list(getDefaultServerReq(exchange)).flatMap(response -> {
+            assertThat(response.statusCode()).isEqualTo(HttpStatus.OK);
+            return response.writeTo(exchange, context);
+        })).expectComplete().verify();
+        assertExchange(exchange,"[]");
+    }
+
+    @Test
+    public void delete() {
+        MockServerWebExchange exchange = MockServerWebExchange.from(MockServerHttpRequest.delete("/cart/list"));
+        Mockito.when(service.delete(any())).thenReturn(Mono.just(new ArrayList<>()));
+        StepVerifier.create(handler.delete(getDefaultServerReq(exchange)).flatMap(response -> {
             assertThat(response.statusCode()).isEqualTo(HttpStatus.OK);
             return response.writeTo(exchange, context);
         })).expectComplete().verify();
