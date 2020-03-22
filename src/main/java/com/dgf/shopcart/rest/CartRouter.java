@@ -21,4 +21,8 @@ public class CartRouter {
     public RouterFunction<ServerResponse> list(CartHandler handler) {
         return route(GET("/cart/list"), handler::list);
     }
+    @Bean
+    public RouterFunction<ServerResponse> delete(CartHandler handler) {
+        return route(DELETE("/cart/list"), handler::delete);
+    }
 }

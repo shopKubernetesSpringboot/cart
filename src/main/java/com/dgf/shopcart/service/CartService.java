@@ -33,4 +33,10 @@ public class CartService {
         return cart.map(Cart::getItems);
     }
 
+    public Mono<List<Item>> delete(Mono<Cart> cart) {
+        return cart.map(c -> {
+            c.getItems().clear();
+            return c.getItems();
+        });
+    }
 }

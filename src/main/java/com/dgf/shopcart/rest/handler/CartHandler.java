@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -28,21 +27,28 @@ public class CartHandler {
     private final MyValidator<CartItemAddRequest> validator;
 
     public Mono<ServerResponse> add(ServerRequest request) {
-            return request.bodyToMono(CartItemAddRequest.class)
+        return request.bodyToMono(CartItemAddRequest.class)
                 .flatMap(validator::validate)
-                .flatMap(item -> service.add(getCart(request.session()), item))
+                .flatMap(item -> service.add(getCart(request), item))
                 .flatMap(item -> ok().contentType(APPLICATION_JSON).body(fromValue(item)))
                 .switchIfEmpty(BAD_REQUEST);
     }
 
     public Mono<ServerResponse> list(ServerRequest request) {
-        return service.list(getCart(request.session())).flatMap(resp ->
+        return service.list(getCart(request)).flatMap(resp ->
                 ok().contentType(APPLICATION_JSON).body(fromValue(resp))
         );
     }
 
-    public Mono<Cart> getCart(Mono<WebSession> monoSession) {
-        return Mono.from(monoSession.map(session -> {
+    public Mono<ServerResponse> delete(ServerRequest request) {
+        return service.delete(getCart(request)).flatMap(resp ->
+                ok().contentType(APPLICATION_JSON).body(fromValue(resp))
+        );
+    }
+
+
+    public Mono<Cart> getCart(ServerRequest request) {
+        return Mono.from(request.session().map(session -> {
             Cart cart = session.getAttribute(CART);
             if (cart == null) {
                 cart = new Cart();
