@@ -55,7 +55,6 @@ public class CartHandler {
                 cart = new Cart();
                 session.getAttributes().put(CART, cart);
             }
-            log.info("cart={}", cart);
             return cart;
         }));
     }

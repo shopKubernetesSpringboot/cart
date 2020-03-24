@@ -20,7 +20,7 @@ public class CartServiceTest {
         StepVerifier
             .create(service.add(Mono.just(new Cart()),new CartItemAddRequest(item)))
             .assertNext(loaded -> {
-                assertEquals("product1",loaded.getName());
+                assertEquals(item.getName(),loaded.getName());
                 assertEquals((Long)1L,loaded.getId());
             })
             .expectComplete()
