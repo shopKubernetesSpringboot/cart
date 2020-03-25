@@ -9,11 +9,11 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
 /**
- * At the moment there is no way to print headers via spring property
+ * At the moment there is no way to print headers via spring properties
  */
 @Slf4j
 @ControllerAdvice()
-@ConditionalOnProperty(name="com.dgf.shopCart.log.response.headers", havingValue="true")
+@ConditionalOnProperty("com.dgf.shopCart.log.response.headers")
 public class LoggingFilter implements WebFilter {
 
     @Override
