@@ -14,20 +14,16 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @ControllerAdvice()
 @ConditionalOnProperty("com.dgf.shopCart.log.response.headers")
-public class LoggingFilter implements WebFilter {
+public class LoggingResponseFilter implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         long startTime = System.currentTimeMillis();
-        String path = exchange.getRequest().getURI().getPath();
-        log.info("Serving '{}'", path);
-
         return chain.filter(exchange).doAfterTerminate(() -> {
-                    exchange.getResponse().getHeaders().forEach((key, value) -> log.info("Response header '{}': {}", key, value));
-                    log.info("Served '{}' as {} in {} msec",
-                            path,
-                            exchange.getResponse().getStatusCode(),
-                            System.currentTimeMillis() - startTime);
+                    exchange.getResponse().getHeaders().forEach(
+                            (key, value) -> log.info("{}Response header '{}': {}", exchange.getLogPrefix(), key, value)
+                    );
+                    log.info("{}{} msec", exchange.getLogPrefix(), System.currentTimeMillis() - startTime);
                 }
         );
     }
