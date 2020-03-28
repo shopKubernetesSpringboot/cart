@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class Item {
 
     @NotNull
-    private Long id;
+    private String id;
     @NotNull
     private String name;
     private Integer quantity=1;

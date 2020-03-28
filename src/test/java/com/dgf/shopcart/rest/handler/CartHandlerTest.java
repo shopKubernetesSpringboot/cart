@@ -42,7 +42,7 @@ public class CartHandlerTest extends BaseHandlerTest {
                         .contentType(APPLICATION_JSON)
                         .accept(APPLICATION_JSON)
                         .body(cartItemAddRequestJson));
-        Mockito.when(service.add(any(), any())).thenReturn(Mono.just(new Item(1L, "product1", 1)));
+        Mockito.when(service.add(any(), any())).thenReturn(Mono.just(new Item("1", "product1", 1)));
         Mono<Void> voidMono = handler.add(getDefaultServerReq(exchange)).flatMap(response -> {
             assertThat(response.statusCode()).isEqualTo(HttpStatus.OK);
             return response.writeTo(exchange, context);

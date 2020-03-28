@@ -28,7 +28,7 @@ public abstract class BaseHandlerTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final HandlerStrategies strategies = HandlerStrategies.withDefaults();
-    private final Item item = new Item(1L, "product1", 1);
+    private final Item item = new Item("1", "product1", 1);
     final String cartItemAddRequestJson = mapper.writeValueAsString(new CartItemAddRequest(item));
     final String itemJson = mapper.writeValueAsString(item);
 

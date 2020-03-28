@@ -36,8 +36,8 @@ import static org.springframework.security.test.web.reactive.server.SecurityMock
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CartIntegrationTest {
 
-    private Item item = new Item(1L, "Product1", 1);
-    private Item item2 = new Item(2L, "Product2", 1);
+    private Item item = new Item("1", "Product1", 1);
+    private Item item2 = new Item("2", "Product2", 1);
 
     @LocalServerPort
     private int port;

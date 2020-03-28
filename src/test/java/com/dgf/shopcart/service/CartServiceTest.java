@@ -13,7 +13,7 @@ public class CartServiceTest {
 
     private CartService service = new CartService();
 
-    private final Item item = new Item(1L, "product1", 1);
+    private final Item item = new Item("1", "product1", 1);
 
     @Test
     public void add() {
@@ -21,7 +21,7 @@ public class CartServiceTest {
             .create(service.add(Mono.just(new Cart()),new CartItemAddRequest(item)))
             .assertNext(loaded -> {
                 assertEquals(item.getName(),loaded.getName());
-                assertEquals((Long)1L,loaded.getId());
+                assertEquals(item.getId(),loaded.getId());
             })
             .expectComplete()
             .verify();

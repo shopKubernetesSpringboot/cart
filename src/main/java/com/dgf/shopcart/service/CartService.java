@@ -16,7 +16,7 @@ public class CartService {
     public Mono<Item> add(Mono<Cart> cart, CartItemAddRequest req) {
         return cart.map(c ->
                 c.getItems().stream()
-                    .filter(p -> p.getId().longValue() == req.getItem().getId().longValue())
+                    .filter(p -> p.getId().equals(req.getItem().getId()))
                     .findFirst()
                     .map(p-> {
                         p.setQuantity(p.getQuantity()+1);
