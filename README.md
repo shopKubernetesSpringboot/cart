@@ -15,7 +15,12 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.dgf%3AshopCart&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart)
 ## Description
 
-Fully reactive shop cart REST API micro-service.  Also see the related [front-end ReactJs project](https://github.com/davidgfolch/shop-web)
+Fully reactive shop cart REST API micro-service.
+
+Also see the related projects:
+ 
+- [front-end ReactJs project](https://github.com/davidgfolch/shop-web)
+- [shopProduct mss](https://github.com/davidgfolch/shopProduct)
 
 - Allows to add an Item at once to the Cart.  Keeps items in the Cart in the current session.
 
@@ -34,7 +39,7 @@ Notes:
 - BeanValidation implementation.
 - Reactive junit tests.
 - Integration test.
-- Basic auth security implementation.
+- Basic auth security implementation & csrf.
 - Sonar gradle plugin
     - you can run Sonarqube gradle task if you have sonar installed on localhost:9000
     - or see the [Sonarcloud.io](https://sonarcloud.io/dashboard?id=com.dgf%3AshopCart) dashboard for this project (through travis-ci integration).
