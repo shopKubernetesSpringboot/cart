@@ -18,6 +18,7 @@ import static org.springframework.web.reactive.function.BodyInserters.fromValue;
 
 @Component
 @Order(-2)
+//@ConditionalOnProperty()
 public class GlobalExceptionHandler extends AbstractErrorWebExceptionHandler {
 
     public GlobalExceptionHandler(GlobalErrorAttributes errorAttrs, ResourceProperties resourceProps, ApplicationContext context, ServerCodecConfigurer serverCodecConfigurer) {

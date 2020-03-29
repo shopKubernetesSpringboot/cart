@@ -34,7 +34,7 @@ import static org.springframework.security.test.web.reactive.server.SecurityMock
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(classes = App.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class CartIntegrationTest {
+public class AppIntegrationTest {
 
     private Item item = new Item("1", "Product1", 1);
     private Item item2 = new Item("2", "Product2", 1);

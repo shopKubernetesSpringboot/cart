@@ -54,6 +54,7 @@ dependencies {
     compileOnly group: 'org.springframework.boot.experimental', name: 'spring-boot-thin-gradle-plugin', version: '1.0.23.RELEASE'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
     testCompile 'org.springframework.security:spring-security-test'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
