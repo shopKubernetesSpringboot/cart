@@ -18,10 +18,10 @@ import org.springframework.web.reactive.config.EnableWebFlux;
 @EnableWebFlux
 @EnableWebFluxSecurity()
 @Slf4j
-public class App {
+public class ShopCartApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class);
+        SpringApplication.run(ShopCartApp.class);
     }
 
     @Bean
