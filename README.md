@@ -46,13 +46,19 @@ Notes:
   
 ### Run
 #### Spring boot application
-- Run App as a spring-boot app:
+- Run ShopCartApp as a spring-boot app:
     - command line: `gradlew :bootRun`
-    - intellij: right button on `App.java` & Run...
+    - intellij: right button on `ShopCartApp.java` & Run...
 #### With docker
 
-    docker build -t techtests/shopcart .
-    docker run -p 8080:8080 -t techtests/shopcart
+```shell script
+#optional
+docker system prune
+
+#build & run image
+docker build -t techtests/shopcart .
+docker run -p 8080:8080 -t techtests/shopcart
+```
     
 ### Try
 #### With curl

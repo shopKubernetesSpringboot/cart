@@ -21,7 +21,7 @@ apply plugin: 'jacoco'
 jar {
     manifest {
         attributes(
-                'Start-Class': 'com.dgf.shopcart.App'
+                'Start-Class': 'com.dgf.shopcart.ShopCartApp'
         )
     }
 }
