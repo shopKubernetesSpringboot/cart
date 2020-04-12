@@ -18,7 +18,14 @@ public class LoggingResponseFilter implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+        log.info("LoggingResponseFilter.filter");
         long startTime = System.currentTimeMillis();
+        exchange.getRequest().getHeaders().forEach(
+                (key, value) -> log.info("{}Request header '{}': {}", exchange.getLogPrefix(), key, value)
+        );
+        exchange.getRequest().getCookies().forEach(
+                (key, value) -> log.info("{}Request cookies '{}': {}", exchange.getLogPrefix(), key, value)
+        );
         return chain.filter(exchange).doAfterTerminate(() -> {
                     exchange.getResponse().getHeaders().forEach(
                             (key, value) -> log.info("{}Response header '{}': {}", exchange.getLogPrefix(), key, value)

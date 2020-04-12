@@ -106,6 +106,8 @@ Generated images:
     techtests/shopcart                               latest               36234d830c12        14 hours ago        125MB
     techtests/shopcart-optimized                     latest               3e22c1446dd8        15 hours ago        151MB
 
-# TODO
-- Full micro-service architecture.
+## Kubernetes
+Compile, publish to docker and deploy to kubernetes
+
+    ./publishToDocker.sh && bash -c '../kubernetes/publish.sh $0' cart
 
