@@ -4,6 +4,7 @@ import com.dgf.shopcart.TestConfig;
 import com.dgf.shopcart.model.Item;
 import com.dgf.shopcart.rest.handler.req.CartItemAddRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
@@ -61,7 +62,16 @@ public abstract class BaseHandlerTest {
                 .consumeNextWith(System.out::println)
                 .expectComplete().verify();
         assertThat(mockResponse.getHeaders().getContentType()).isEqualTo(APPLICATION_JSON);
-        assertThat(mockResponse.getBodyAsString().block()).isEqualTo(expectedBody);
+        String bodyAsString = mockResponse.getBodyAsString().block();
+        JsonNode expectedJson = null;
+        JsonNode bodyAsStringJson = null;
+        try {
+            expectedJson = mapper.readTree(expectedBody);
+            bodyAsStringJson = mapper.readTree(bodyAsString);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        assertThat(bodyAsStringJson).isEqualTo(expectedJson);
     }
 
 
